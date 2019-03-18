@@ -47,3 +47,10 @@ T[]
 A new array containing copies of the elements of the Stack<T>.*/
 Stack<string> numbers = new Stack<string>();
 Stack<string> stack2 = new Stack<string>(numbers.ToArray());
+
+
+//7 public void CopyTo (T[] array, int arrayIndex);
+//Copies the Stack<T> to an existing one-dimensional Array, starting at the specified array index.
+Stack<string> numbers = new Stack<string>();
+string[] array2 = new string[numbers.Count * 2];
+numbers.CopyTo(array2, numbers.Count);
