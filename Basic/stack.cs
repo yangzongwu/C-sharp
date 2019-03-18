@@ -17,7 +17,7 @@ Stack<string> stack3 = new Stack<string>(array2);
 
 //属性
 //Count，获取堆栈中包含的元素数量。
-stack.Count();
+stack.Count;
 
 //方法
 //1	public void Clear ();; 
