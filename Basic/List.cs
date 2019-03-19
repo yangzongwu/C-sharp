@@ -34,4 +34,4 @@ List.Contains(T item);
 List.Sort(); //默认是元素第一个字母按升序
 List.Reverse();
 List.Clear();
-List.Count();
+List.Count;
