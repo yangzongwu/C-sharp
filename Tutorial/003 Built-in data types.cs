@@ -25,7 +25,8 @@ namespace part1_ConsoleApp1
             Decimal
                 decimal : 128 bits, range is at least -7.9 × 10-28 to 7.9 × 1028, with at least 28-digit precision
             Character and string 
-                processing in C# uses Unicode encoding. The char type represents a UTF-16 code unit, and the string type represents a sequence of UTF-16 code units. 
+                processing in C# uses Unicode encoding. The char type represents a UTF-16 code unit, and the string 
+                type represents a sequence of UTF-16 code units. 
              */
             int i = 0;
             Console.WriteLine(i);
