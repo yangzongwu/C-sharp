@@ -1,6 +1,8 @@
 //C# functions can be overloaded based on the number,type(int,float etc) 
 //and kind(Value,Ref,Out) of parameters
 
+//return type and parameter can not used to overload functions
+
 
 using System;
 class Program
