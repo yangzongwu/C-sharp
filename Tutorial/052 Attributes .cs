@@ -13,7 +13,7 @@ public class Calculator
     /*
      * [Obsolete]
      * [Obsolete("use Add(Add(List<int> Numbers)) Method")]
-     * 
+     * [Obsolete("use Add(Add(List<int> Numbers)) Method"),ture]
      * 
      * 查看定义，该属性是继承Attribute，这样用法就是直接标在函数或者成员上面，并用“[]”包起来。
      * 该特性有三种构造函数，第二种常用，就是让函数提示过时，同时里面有message提示信息。用法就
