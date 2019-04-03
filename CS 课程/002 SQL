@@ -1,6 +1,15 @@
 SQL 
-
 data Scientist/applied scientist/research Scientist: model dev
 data engineer:support ETL/data bse/production
 data analyst:maintain dashboard/visializion
-merchine learing engineer:implentant
+machine learning engineer:implantation
+
+
+skill:
+1.SQL
+2.Python/R    Plus Java/C++/C#
+3.PowerBI/tableau/Excel(visializion)/SAS/SPASS
+other:
+4.STAT./ML./OR.
+5.initiation MapReduce
+
