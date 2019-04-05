@@ -1,0 +1,117 @@
+SFJOWGHO
+
+Study Route:
+Query-->Datetime -->Variable-->Exp-->Func-->Query-->View-->SP-->PT
+
+SQL--两种
+DDL  Data Define language
+DML  manipulation language
+
+baisc:
+Data: CRUD 增删查改
+集合操作 子差并补
+Stat. 大小集合均
+join 内外交
+
+
+query：
+查询模板SFJOWGHO
+select from 
+join on 
+where 
+group by 
+having 
+order by
+
+
+scama;  表前面有 **.  安全隔离
+eg: product.Name
+eg:sale.Name
+
+有[]，[]里面的字不算关键字
+
+大小写不敏感
+
+----------------select-------------------from--------------------------------------------------------------
+--[]避免关键字
+select * from [Person].[Person]--不建议
+select top 100 * from [Person].[Person]
+
+select top 10 [FirstName],[MiddleName],[LastName] 
+from [Person].[Person]
+
+select distinct [FirstName]
+from [Person].[Person]
+
+--不整除取floor
+select top 10 percent [FirstName]  
+from [Person].[Person]
+
+--权限命名，可以省略，最好不省略
+select P.[FirstName]  
+from [Person].[Person] As P
+
+--修改别名
+select [FirstName] as [FN]  
+from [Person].[Person] As P
+
+----------------where------------------操作符---------------------------------------------------------------
+select [FirstName],[LastName]
+from [Person].[Person]
+where [FirstName]<>'John'
+
+select [FirstName],[LastName]
+from [Person].[Person]
+where [FirstName] like 'Tim%'
+
+select [FirstName],[LastName]
+from [Person].[Person]
+where [FirstName] like '_im%'
+--_任意一个字符
+
+select [FirstName],[LastName]
+from [Person].[Person]
+where [FirstName] like '_[tk]m%'
+--_任意一个字符+[tk]其中之一+m+其他
+
+select [FirstName],[LastName]
+from [Person].[Person]
+where [FirstName] like '^[tk]m%'
+--^不包括[tk]
+
+
+----------------where------------------操作符---------------------------------------------------------------
+操作符本质是函数简记法
+select [FirstName]+' '+[LastName] as [FullName]
+from [Person].[Person]
+
+----------------where------------------函数---------------------------------------------------------------
+自带几千函数
+一类 统计函数，一类Scala函数
+select concat([FirstName],' '，[LastName])as [FullName]
+from [Person].[Person]
+
+SQL index 从1开始
+Scala函数:
+select SUBSTRING('Timothy',1,3)
+统计函数:
+select max(SubTotal) from Sales.SalesOrderHeader
+select min(SubTotal) from Sales.SalesOrderHeader
+select count(SalesOrderID) from Sales.SalesOrderHeader
+select sum(SubTotal) from Sales.SalesOrderHeader
+select avg(SubTotal) from Sales.SalesOrderHeader
+
+
+----------------oder by---------------------------------------------------------------------------------
+select [FirstName],[LastName]
+from [Person].[Person]
+order by [FirstName],[LastName]
+
+select [FirstName],[LastName]
+from [Person].[Person]
+order by [FirstName],[LastName] desc
+
+--asc可以省略
+select [FirstName],[LastName]
+from [Person].[Person]
+order by [FirstName] desc,[LastName] asc
