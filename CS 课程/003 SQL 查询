@@ -176,3 +176,22 @@ from Person.Person
 group by FirstName
 )
 select * from temp where Frequency>=90
+
+
+-------------如下两段作用一样-------------------------------------------------------
+with temp as (
+select s.Name ,BA.AddressID as AddressID
+from Sales.Store as S
+join [Person].[BusinessEntityAddress] as BA
+on s.BusinessEntityID=BA.BusinessEntityID 
+)
+select PA.AddressLine1,PA.City,t.Name
+from [Person].[Address] as PA
+join temp as T
+on T.AddressID=PA.AddressID
+
+
+Select s.Name,a.AddressLine1,a.City
+from Sales.Store as s
+join Person.BusinessEntityAddress as bea on s.BusinessEntityID=bea.BusinessEntityID
+join person.Address as a on bea.AddressID=a.AddressID
