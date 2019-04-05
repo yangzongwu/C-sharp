@@ -87,7 +87,8 @@ from [Person].[Person]
 
 ----------------where------------------函数---------------------------------------------------------------
 自带几千函数
-一类 统计函数，一类Scala函数
+一类 聚合函数 stat
+一类 单值函数 Scala
 select concat([FirstName],' '，[LastName])as [FullName]
 from [Person].[Person]
 
@@ -102,7 +103,7 @@ select sum(SubTotal) from Sales.SalesOrderHeader
 select avg(SubTotal) from Sales.SalesOrderHeader
 
 
-----------------oder by---------------------------------------------------------------------------------
+----------------order by---------------------------------------------------------------------------------
 select [FirstName],[LastName]
 from [Person].[Person]
 order by [FirstName],[LastName]
@@ -115,3 +116,63 @@ order by [FirstName],[LastName] desc
 select [FirstName],[LastName]
 from [Person].[Person]
 order by [FirstName] desc,[LastName] asc
+
+
+----------------join---------------------------------------------------------------------------------
+多表查询，为了避免表里面数据有重复，分开存储
+--join 目的从多张表中查询数据
+--结果 把多张表形成一张虚拟的大表
+
+select sod.ProductID,sod.LineTotal 
+from Sales.SalesOrderDetail as sod
+
+select p.ProductID,p.Name 
+from Production.Product as p
+order by p.ProductID
+
+select p.ProductID,p.Name,sod.LineTotal
+from Sales.SalesOrderDetail as sod
+join Production.Product as p 
+on sod.ProductID=p.ProductID
+-- 默认inner
+
+left join
+right join
+
+select p.ProductID,p.Name,sod.LineTotal
+from Sales.SalesOrderDetail as sod
+right join Production.Product as p 
+on sod.ProductID=p.ProductID
+
+A left join B left join C
+(A) left
+(A left join B) left
+SQL 执行顺序从左向右
+
+----------------group by---------------------------------------------------------------------------------
+聚合函数只要给一组值都可以得到返回值
+大部分是和group by一起使用
+但是没必要一定和group by 一起使用
+分组一定聚合，聚合不一定分组
+
+--T-SQL order by 无论何时都可以使用别名
+select FirstName,count(LastName) as Frequency
+from Person.Person
+group by FirstName
+order by Frequency
+
+select FirstName,count(LastName) as Frequency
+from Person.Person
+group by FirstName
+--wherer  Frequency>=100  where 是对数据源处理的，这里不能用where
+--having Frequency>=100  T-SQL 这里不能使用别名,但是可以使用数据源的别名，
+having count(LastName)>=90
+order by Frequency desc
+
+
+with temp as(
+select FirstName,count(LastName) as Frequency
+from Person.Person
+group by FirstName
+)
+select * from temp where Frequency>=90
