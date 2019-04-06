@@ -1,5 +1,5 @@
 //--------------------------EmployeeManagement.csproj------------------------------------------------------------
-右键项目名，edit EmployeeManagement.csproj
+//右键项目名，edit EmployeeManagement.csproj
 
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
