@@ -48,3 +48,96 @@ Middleware in ASP.NET Core
 >May process the outgoing Response
 >Middlewares are executed in the order they are added
 */
+
+
+    
+//-------------------------------Startup.cs--------------------------------------
+// output "Hello from 1st middleware"
+// not output "Hello from 2nd middleware"
+// Run is a terminal method
+
+namespace EmployeeManagement
+{
+    public class Startup
+    {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello from 1st middleware");
+                await next();
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello from 2nd middleware");
+            });
+        }
+    }
+}
+
+//-------------------------------Startup.cs--------------------------------------
+// output "Hello from 1st middleware" and "Hello from 2nd middleware"
+namespace EmployeeManagement
+{
+    public class Startup
+    {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.Use(async (context,next) =>
+            {
+                await context.Response.WriteAsync("Hello from 1st middleware");
+                await next();
+            });
+
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello from 2nd middleware");
+            });
+        }
+    }
+}
+
+//-------------------------------Startup.cs--------------------------------------
+/*
+EmployeeManagement.Startup:Information: MW1:Incoming Request
+EmployeeManagement.Startup:Information: MW2:Incoming Request
+EmployeeManagement.Startup:Information: MW3:Request handled and response produced
+EmployeeManagement.Startup:Information: MW2:Outgoing Request
+EmployeeManagement.Startup:Information: MW1:Outgoing Request
+*/
+/*
+output : MW3:Request handled and response produced
+*/
+public void Configure(IApplicationBuilder app, IHostingEnvironment env,ILogger<Startup> logger)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.Use(async (context,next) =>
+            {
+                logger.LogInformation("MW1:Incoming Request");
+                await next();
+                logger.LogInformation("MW1:Outgoing Request");
+            });
+            app.Use(async (context, next) =>
+            {
+                logger.LogInformation("MW2:Incoming Request");
+                await next();
+                logger.LogInformation("MW2:Outgoing Request");
+            });
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("MW3:Request handled and response produced");
+                logger.LogInformation("MW3:Request handled and response produced");
+            });
+        }
