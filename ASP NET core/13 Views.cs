@@ -195,3 +195,56 @@ Email: dfds@gmail.com
 Department: HR
 */
 
+
+//=================================================View Model================================================
+//We create a "View Model" when a Model object does not contain all the data a view needs
+
+//----------------Project/ViewModels/HomeDetailsViewModel.cs-------------------------
+namespace EmployeeManagement.ViewModels
+{
+    public class HomeDetailsViewModel
+    {
+        public Employee Employee { get; set; }
+        public string PageTitle { get; set; }
+    }
+}
+
+//----------------Project/Controllers/HomeController.cs-------------------------
+public ViewResult Details()
+        {
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Employee = _employeeRepository.GetEmployee(1),
+                PageTitle = "Employee Details"
+            };
+            return View(homeDetailsViewModel);
+        }
+//----------------Project/Views/Home/Details.cshtml-------------------------
+@model EmployeeManagement.ViewModels.HomeDetailsViewModel
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h3>@Model.PageTitle</h3>
+
+    <div>
+        Name: @Model.Employee.Name
+    </div>
+    <div>
+        Email: @Model.Employee.Email
+    </div>
+    <div>
+        Department: @Model.Employee.Department
+    </div>
+</body>
+</html>
+//----------------output------------------------------------------------------
+//http://localhost:63788/home/details
+/*
+Employee Details
+Name: Mary
+Email: dfds@gmail.com
+Department: HR
+*/
