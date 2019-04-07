@@ -9,7 +9,7 @@ DML  manipulation language
 
 baisc:
 Data: CRUD 增删查改
-集合操作 子差并补
+集合操作 子交并补
 Stat. 大小集合均
 join 内外交
 
