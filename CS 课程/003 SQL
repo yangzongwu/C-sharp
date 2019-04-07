@@ -1,0 +1,43 @@
+-----------------------------------------------------复习--------------------------------------------------------------
+集合操作： 子交并补 
+SFJOWGHO
+
+SQL--两种
+DDL  Data Define language
+DML  manipulation language
+
+五好学生：听得懂，记得住，想得通，讲的请，做得出
+
+推荐图书： T-SQL fundamentals   入门，可以图书馆
+
+select *  
+from [Sales].[SalesOrderHeader] as sod
+where year(sod.DueDate)=2011 
+
+select year(sod.DueDate) as year,sum(sod.[SubTotal]) as total 
+from [Sales].[SalesOrderHeader] as sod
+group by  year(sod.DueDate)
+order by total desc
+
+
+select *
+from Sales.SalesOrderHeader
+where [DueDate]=EOMONTH(DueDate)
+
+
+select distinct LastName
+from person.Person
+where LastName like '%e%e%'
+
+
+select top 3 avg(Freight) as avgF,[ShipToAddressID]
+from [Sales].[SalesOrderHeader]
+where year([ShipDate])=2014
+group by [ShipToAddressID]
+order by avgF desc
+
+额外课题：
+data 三条路线
+DB-DW-BI : SQL,PowerBI,tableau
+SQL-ETL : SQL:ETL处理
+TXT,lOS-BigData  ：python ,java, scalar
