@@ -41,3 +41,81 @@ data 三条路线
 DB-DW-BI : SQL,PowerBI,tableau
 SQL-ETL : SQL:ETL处理
 TXT,lOS-BigData  ：python ,java, scalar
+
+
+select top 3 avg(soh.Freight) as avgF,pcr.Name
+from [Sales].[SalesOrderHeader] as soh
+join Person.Address as pa
+on soh.BillToAddressID=pa.AddressID
+join Person.StateProvince as psp
+on pa.StateProvinceID=psp.StateProvinceID
+join Person.CountryRegion as pcr
+on psp.CountryRegionCode=pcr.CountryRegionCode
+where year([ShipDate])=2014
+group by pcr.Name
+order by avgF desc
+
+
+//================================================数据类型===============================================================
+数据类型：
+当把信息记录下来之后就变为了数据
+
+数据库处理的主要类型：
+  >整数 ： 数学范围内没有范围
+  >实数 ： 数学范围内没有范围
+  >字符串 ：  数学范围内没有范围
+  >byte,Boolean SQL没有，但是SQL 有byte类型，两个值0，1 ：两个值
+  >空类型 null ：一个值
+  
+ 数值的大小决定了可以取的个数
+ 由于计算机内存限制，则有了限制
+ 
+int 分配了32空间，如果只用了2个空间，但是剩下的30个空间也都分配处于已经使用的状态
+ 
+设计表的时候一定要先想好类型，数值的范围
+ 
+一个字节8位，256
+可以0-255
+也可以-128~+127
+SQL都是有符号的 即 -128~+127
+ 
+整数：
+SQL bit数和数位关系   -2**(n-1)  ~ 2**(n-1) - 1
+无符号 0~2**n-1
+ 
+浮点数：
+eg:0.5   --> (5  -1) 整数部分和小数部分
+浮点数小数部分和整数部分会争夺空间，故只能存储数值小精度大或者数值大精度小值
+SQL 浮点数：...
+
+字符串：
+SQL没有字符类型，一个字符也是字符串，
+分为四类存储方式：
+字符 存储有两种方式：宽字符，窄字符
+最开始计算机用一个字节表示一个字符：'a'--97,'A'--65
+字符变多，字节变多，叫宽字符，只要不是用一个字节表示的叫宽字符
+SQL
+char   char(定常窄字符char) varchar（变长窄字符char）
+nchar  nchar(定常宽字符char) nvarchar（变长宽字符char）
+
+定长 vs 变长
+@str1 char(5)
+@str2 varchar(5)
+如果都给字符"abc"
+SET @str1='abc'  内存占用5
+SET @str2='abc'  内存占用3
+SET @str1='abcdef'  内存占用5  SQL字段截断，不报错
+SET @str2='abcdef'  内存占用5
+定常速度快，变长缩小内存使用，空间换速度
+
+nchar nvarchar 赋值前面加N
+@str1 nchar(5)
+@str2 nvarchar(5)
+SET @str1=N'abc'  内存占用10（data length 数据真实的长度，在内存里的长度），调用@str1.Length 为3，注意区别
+SET @str2=N'abc'  内存占用6
+SET @str1=N'abcdef' 内存占用10
+SET @str2=N'abcdef' 内存占用10
+
+宽字符赋给窄字符 会乱码，即使窄字符长度大于宽字符长度
+eg: SET @str2='SQL的的的' 调出显示 SQL???
+
