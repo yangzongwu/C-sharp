@@ -1,0 +1,61 @@
+Arithmetic Operators
++
+-
+*
+/
+
+3.5
+trunc 3
+ceiling 4
+flow  3
+rount 4
+-3.5
+trunc -3
+ceiling -4
+flow  -3
+rount -4
+
+select 3+3,3-3,3*3,3/100
+ouput  6,0,9,0
+
+Assignment 
+=
+DECLARE @MyCounter INT
+SET @MyCounter = 1
+select MyCounter
+
+
+Compound 
+@a+=100;
+
+Comparison
+
+--N
+if 2=100
+  select 'Y'
+else
+  select 'N'
+  
+--n  
+if null =null
+	select 'y'
+else
+	select 'n'
+
+--n  
+if null !=null
+	select 'y'
+else
+	select 'n'
+  
+--y
+if null is null
+	select 'y'
+else
+	select 'n'
+  
+--n
+if null is not null
+	select 'y'
+else
+	select 'n'
