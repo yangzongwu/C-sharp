@@ -108,3 +108,18 @@ Unary 一个值操作
 - (Negative)	Numeric value is negative.
 ~ (Bitwise NOT)	Returns the ones complement of the number.
 按位取反加1
+
+
+
+-------------------------------Logical ------------------------------------
+
+----------------------------------exists-----------------------------------
+if (select count(*) from Person.Person where FirstName='Serena')>0
+	select 'Y'
+else
+	select 'N'
+
+if exists(select * from Person.Person where FirstName='Serena')
+	select 'Y'
+else
+	select 'N'
