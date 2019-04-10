@@ -28,7 +28,18 @@ select MyCounter
 Compound 
 @a+=100;
 
-Comparison
+-----------------------------------Comparison----------------------------------------------------------------
+
+= (Equals)	Equal to
+> (Greater Than)	Greater than
+< (Less Than)	Less than
+>= (Greater Than or Equal To)	Greater than or equal to
+<= (Less Than or Equal To)	Less than or equal to
+<> (Not Equal To)	Not equal to
+!= (Not Equal To)	Not equal to (not ISO standard)
+!< (Not Less Than)	Not less than (not ISO standard)
+!> (Not Greater Than)	Not greater than (not ISO standard)
+
 
 --N
 if 2=100
@@ -59,3 +70,41 @@ if null is not null
 	select 'y'
 else
 	select 'n'
+
+出现null的时候必须使用is
+
+
+= 比较字符串？大小写不敏感
+if 't' ='T'---Y
+	select 'Y'
+else
+	select 'N'
+
+if 'to' >='To'
+	select 'Y'--Y
+else
+	select 'N'
+
+if 'tod' >='To'
+	select 'Y'--Y
+else
+	select 'N'
+	
+if 'to' >='ao'
+	select 'Y'--Y
+else
+	select 'N'
+
+不等于
+!=,<> 是一样的
+!=不是SQL国际标准
+<>是国际标准
+
+
+
+----------------------------------------Unary -------------------------------------
+Unary 一个值操作
++ (Positive)	Numeric value is positive.
+- (Negative)	Numeric value is negative.
+~ (Bitwise NOT)	Returns the ones complement of the number.
+按位取反加1
