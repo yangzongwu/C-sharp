@@ -53,3 +53,69 @@ N: N 至少三张表
 外键约束，比如书的类型约定了1，2，3，书里面取书的类型填写只能1|2|3，不能4
 加外键完整性，但是性能损失
 
+
+
+复习：
+表操作方式：增删查改
+数据对应关系 ： 1v1,1vN,NvN
+是否需要外键：关系是天然的，不是必须外键约束，SQL对于数据特殊处理，所以有的时候用外键约束。
+
+
+//交友原则： kind, smart
+//微软 周二更新，
+
+
+插入：
+USE [Bookstore]
+GO
+//如上两局可以省略，只是强制转化为Bookstore数据库
+INSERT INTO [dbo].[Book]   //into 可以省略
+           ([CategoryID],[Name],[Price])
+     VALUES
+           (null,N'西游记',9.9),
+		       (null,N'红楼梦',9.9),
+		       (null,N'水浒传',9.9),
+		       (null,N'三国演义',9.9)
+GO
+output:(2 rows affected)//告诉客户端
+set nocount on //如果把这行到最前面，则没有output输出，不记录对于rows的影响，
+set nocount on /一般用于大批量插入数据（增删查改），没有该行的话，需要计数，有性能损失
+set nocount off
+
+
+//修改值
+update
+USE [Bookstore]
+GO
+UPDATE [dbo].[Book]
+   SET [Name] = [Name]+N'(上)'
+ WHERE ID=9
+GO
+
+
+删除重复值：
+USE [Bookstore]
+GO
+
+DELETE FROM [dbo].[Book]
+      WHERE ID not in (
+	  select MIN(ID)
+	  FROM [dbo].[Book]
+	  GROUP BY [Name]
+	  ) 
+GO
+
+select * from Book
+
+
+数据类型不但决定了值在内存中的尺寸和存储方式，也决定了值的行为
+
+
+数值运算：
+
+select '100'+100    200
+select 100+'100'    200
+select '100'+'100'  '100100' SQL数据交换位置不影响行为
+select 100+100     200
+
+值的行为是通过操作符表示出来的
