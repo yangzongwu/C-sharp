@@ -123,3 +123,142 @@ if exists(select * from Person.Person where FirstName='Serena')
 	select 'Y'
 else
 	select 'N'
+
+
+
+
+------------------------------------------set operator ---------------------------------------
+子集  select where (1018, 1206)
+select FirstName
+from Person.Person
+where FirstName like 't%'
+
+交集  intersect（64）
+select distinct FirstName
+from Person.Person
+intersect 
+select distinct LastName
+from Person.Person
+
+并集 （2160）
+select distinct FirstName
+from Person.Person
+union
+select distinct LastName
+from Person.Person
+(数据必须是一一对应的，
+int,char
+int char)
+
+补集 (954)
+select distinct FirstName
+from Person.Person
+except
+select distinct LastName
+from Person.Person
+
+
+
+--------------------------------Logical--------------------------------------------------------------------------------
+SQL 里面没有true,false, 只能作为条件处理，if，或者用0，1表示，在其他语言的时候会被是别人bool类型
+如果回答SQL是否有bool类型值
+不能直接回答是或者否
+SQL是支持Bool类型的，但是不同类型具有不同的表示形式，如0，1 或者if
+
+
+-----------------like--------------------------------------------
+%0到任意个字符
+_代表一个
+[]表示在方括号里面任选一个
+[^]表示方括号里面任意一个都不能在里面
+
+select distinct FirstName
+from Person.Person
+--where FirstName like 'T%'  
+--where FirstName like '[^t]%' 
+--where FirstName Not like 'T%'
+
+------------------and or------------------------------------------
+优先级：先and 在or
+如果有not ： not 优先级最高
+select distinct FirstName
+from Person.Person
+where FirstName like '[t]%' or FirstName like '[c]%'
+
+//查缩写的时候应用如下，T.A.
+select distinct FirstName,LastName,CONCAT(SUBSTRING(FirstName,1,1),SUBSTRING(LastName,1,1))
+from Person.Person
+where FirstName like 't%' and LastName like 'a%'
+
+-----------------------between----------------------------------
+//包含两边，左右两个值也会包含
+select *
+from Person.Person
+
+select *
+from Person.Person
+where LastName between 'A' and 'c'
+where BusinessEntityID between 101 and 200
+
+-----------------------in----------------------------------
+select *
+from Person.Person
+where FirstName in ('timothy','kim')
+
+select *
+from Person.Person
+where BusinessEntityID in (0,1,2,3)
+
+select *
+from Person.Person
+where BusinessEntityID between 100 and 200
+and FirstName in ('timothy','kim')
+
+
+---------------------------all--------------------------------
+//Compares a scalar value with a single-column set of values.
+if 20>=All(select len(firstname) from Person.Person)
+	select 'Yes'
+else
+	select 'No'
+	
+if(select max(len(firstname)) from Person.Person)<=20
+	select 'Yes'
+else
+	select 'No'
+	
+
+
+----------------------any/some------------------------------------
+if 'Michael'= any(
+select FirstName
+from Person.Person
+)
+	select 'Yes'
+else
+	select 'No'
+	
+if 'Michael'= some(
+select FirstName
+from Person.Person
+)
+	select 'Yes'
+else
+	select 'No'
+	
+	
+--------------------exists--------------------------------------------
+if exists(
+select FirstName
+from Person.Person
+where FirstName='serana'
+)
+	select 'Yes'
+else
+	select 'No'
+	
+	
+bool类型表示式一般用于
+where
+having
+条件语句 if , case
