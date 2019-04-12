@@ -1,0 +1,74 @@
+y=f(x)   一种映射关系
+
+返回值类型 函数名(参数列表)
+  函数体：也叫函数的实现
+  返回值
+  
+int func(parameter list)
+  func details；func implement
+  return
+  
+  signature
+  func(parameter list)
+    func details；func implement
+    return
+  
+  header:int func(parameter list)
+  body: func details；func implement
+  
+  c/c++/jave/c#
+  int add(int a, int b){
+    return a+b;
+  }
+  javascritpt
+  add=func(a,b){
+    return a+b;
+  }
+  python
+  def add(a,b):
+    return a+b
+  SQL:
+  create func Add(
+  @a int
+  @b int)
+  as
+  return
+  
+以上包含函数的声明及定义
+  C系列允许声明而不定义
+以上都是former parameter 形式参数
+int x=100;   
+int y=100;
+int z=add(x,y) 调用函数，形式参数获得真正的值叫实际参数 arguments
+
+
+
+select SUBSTRING('asdf',1,2)
+
+
+declare @names varchar(200)='Timothy,kim,jim,natalie'
+select FirstName,LastName
+from Person.Person
+join(select value from STRING_SPLIT(@names,',')) as names
+on Person.FirstName=names.value;
+
+https://docs.microsoft.com/en-us/sql/t-sql/functions/substring-transact-sql?view=sql-server-2017
+aggregate 聚合
+conversion 字符类型转换
+cursor 行操作，性能下降，避免此操作，一般该操作都可以用join之后集群操作
+data type
+    eg:
+    declare @str1 char(5)='abc';
+    declare @str2 varchar(5)='abc';
+    select LEN(@str1),LEN(@str2),DATALENGTH(@str1),DATALENGTH(@str2)//3,3,5,3
+data&time
+json 反序列化
+Mathematical 数学
+logical 逻辑函数
+    declare @n int=cast(rand()*10 as int)
+    select CHOOSE(@n%4+1, 'Tim','Jim','Kim','Min')
+    declare @n int=cast(rand()*10 as int)
+    select iif(@n>5, 'Y','N')
+string
+Ranking
+system
