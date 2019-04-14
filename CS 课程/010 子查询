@@ -1,0 +1,52 @@
+子查询，一般不建议使用
+------------------------子查询----------------------------------------
+用join就可以
+select distinct P1.FirstName
+from Person.Person as P1
+where (
+select count(*)
+from Person.person as P2
+where P1.FirstName=P2.FirstName
+)>90
+
+和上面列子一样
+select *
+from Person.Person
+group by FirstName
+having count(FirstName)>90
+order by FirstName
+
+
+select distinct(p1.FirstName)
+from Person.Person as p1
+where p1.FirstName in (
+select LastName
+from Person.Person as p2)
+
+select distinct(p1.FirstName)
+from Person.Person as p1
+join Person.Person as p2
+on p1.FirstName =p2.LastName
+
+
+------------------------子查询----------------------------------------
+select distinct(p1.FirstName)
+from Person.Person as p1
+where p1.FirstName in (
+select LastName
+from Person.Person as p2)
+
+
+select distinct(p1.FirstName)
+from Person.Person as p1
+where 
+exists(
+select LastName
+from person.Person as p2 
+where p1.FirstName=p2.LastName)
+
+
+select distinct(p1.FirstName)
+from Person.Person as p1
+join Person.Person as p2
+on p1.FirstName =p2.LastName
