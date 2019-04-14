@@ -1,0 +1,67 @@
+window function:
+应用在分段的function 都是 windows function
+
+ROW_NUMBER()
+RANK()
+partition
+
+
+StyleID     ID       RANK      ROW_NUMBER      DENSE_RANK
+----------- -------- --------- --------------- ----------
+1           1        1         1               1
+1           1        1         2               1
+1           1        1         3               1
+1           2        4         4               2
+ROW_NUMBER : Returns a unique number for each row starting with 1. 
+For rows that have duplicate values,numbers are arbitarily assigned.
+
+Rank : Assigns a unique number for each row starting with 1,except 
+for rows that have duplicate values,in which case the same ranking 
+is assigned and a gap appears in the sequence for each duplicate ranking.
+
+
+with 虚拟表名 AS（
+ 用来生成虚拟表的查询
+）
+select ？？？ from 虚拟表名
+
+
+with 虚拟表名1 AS（
+ 用来生成虚拟表的查询
+）
+with 虚拟表名2 AS（
+ 用来生成虚拟表的查询
+）
+with 虚拟表名3 AS（
+ 用来生成虚拟表的查询
+）
+select ？？？ from 虚拟表名1 join 虚拟表名2 join 虚拟表名3
+
+
+select ROW_NUMBER() over (order by BusinessEntityID) as RowNum,
+BusinessEntityID,FirstName,LastName 
+from Person.Person
+
+
+select RANK() over (order by BusinessEntityID) as RowNum,
+BusinessEntityID,FirstName,LastName 
+from Person.Person
+
+select * from vSalesPersonYearlyPerformance
+
+--分段和分组不一样
+select RANK() over(order by subtotal desc) as Persition,SalesPersonID,YEAR,Subtotal
+from vSalesPersonYearlyPerformance
+where SalesPersonID is not Null
+
+
+with temp as(
+select RANK() over(partition by year order by subtotal desc) as Position,SalesPersonID,YEAR,Subtotal
+from vSalesPersonYearlyPerformance
+where SalesPersonID is not Null
+)
+select * from temp
+where Position<=3
+order by year desc
+
+
