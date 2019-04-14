@@ -67,8 +67,10 @@ view:
 
 select * from vSalesPersonYearlyPerformance
 
-select vprevyear.SalesPersonID
+select vprevyear.SalesPersonID,vprevyear.Year as LastYear,
+vcuryear.Year as CurYear, vcuryear.Subtotal-vprevyear.Subtotal as diff
 from vSalesPersonYearlyPerformance as vprevyear
 join vSalesPersonYearlyPerformance as vcuryear
 on vprevyear.SalesPersonID=vcuryear.SalesPersonID 
-and vcuryear.Subtotal>vprevyear.Subtotal and vcuryear.Year-vprevyear.Year=1
+and vcuryear.Subtotal<vprevyear.Subtotal and vcuryear.Year-vprevyear.Year=1
+where vcuryear.Year<=2013
