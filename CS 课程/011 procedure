@@ -1,0 +1,23 @@
+create procedure dbo.uspGetTopSalesByYear
+ @year int =2011,
+ @maxPos int=3
+
+AS
+begin
+	if @year<2011
+		set @year=2011
+	;
+	with temp as (
+	select rank() over(order by subTotal)as Rank,SalesPersonID,year,Subtotal
+	from vSalesPersonYearlyPerformance
+	where year=@year
+	)
+	select * 
+	from temp 
+	where Rank<@maxPos
+end
+go
+
+
+执行
+exec  uspGetTopSalesByYear 2011,5
