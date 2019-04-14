@@ -152,6 +152,18 @@ from Person.Person
 int,char
 int char)
 
+
+1018 union自带distinct
+select distinct FirstName from Person.Person
+union
+select distinct FirstName from Person.Person
+
+2036
+select distinct FirstName from Person.Person
+union all
+select distinct FirstName from Person.Person
+
+
 补集 (954)
 select distinct FirstName
 from Person.Person
