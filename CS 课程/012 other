@@ -20,5 +20,30 @@ modifications are erased.
 SQL 集合性，完整性
 
 
+------------------------BULK INSERT批量插入------------------------------------------
+https://docs.microsoft.com/en-us/sql/t-sql/statements/bulk-insert-transact-sql?view=sql-server-2017
+
+Imports a data file into a database table or view in a user-specified format in SQL Server
+
+
+--created new table salesDate
+BULK INSERT BookStore.db0.salesDate
+FROM '\\share\invoices\inv-2016-07-25.csv' --location
+WITH (
+      FIRSTROW=2, --which row begin, if there have head
+      FIELDTERMINATOR  = ',',--如何分列
+      ROWTERMINATOR  = '\n'-- 如何分行
+      ); 
+
+注意NULL值
+
+复制一列
+select *
+from SalesData
+update SalesData
+set SalesPersonId=TRY_PARSE(SalesPersonId_N AS INT)
+
+
 
 -----------------------exercise-----------------------------------------
+
