@@ -1,0 +1,24 @@
+---------------------trigger ---------------------------------------
+select * from Sales.SalesOrderHeader
+--ModifiedDate  系统自动生成，不属于业务逻辑，
+
+
+---------------------缓存中间表-------------------------------------
+子查询
+CTE
+临时表
+表变量
+
+--------------------transaction----------------------------------------
+操作完整性
+A transaction is a single unit of work. If a transaction is successful, 
+all of the data modifications made during the transaction are committed 
+and become a permanent part of the database. If a transaction encounters 
+errors and must be canceled or rolled back, then all of the data 
+modifications are erased.
+
+SQL 集合性，完整性
+
+
+
+-----------------------exercise-----------------------------------------
