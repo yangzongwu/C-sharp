@@ -1,60 +1,57 @@
-1. What is C#?
-
+### What is C#?
 C# is an object oriented, type safe and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.
 
-2. What are the types of comment in C# with examples?
-
-Single line
-
-Eg:
-
+### What are the types of comment in C# with examples?
+* Single line    
+```csharp
 //This is a Single line comment
-ii. Multiple line (/* */)
-
-Eg:
-
+```
+* Multiple line (/* */)
+```csharp
 /*This is a multiple line comment
 We are in line 2
 Last line of comment*/
-iii. XML Comments (///).
-
-Eg:
-
+```
+* XML Comments (///)  
+```csharp
 /// summary;
 ///  Set error message for multilingual language.
 /// summary
-3. Can multiple catch blocks be executed?
-
-No, Multiple catch blocks can't be executed. Once the proper catch code executed, the control is transferred to the finally block and then the code that follows the finally block gets executed.
-
-4. What is the difference between public, static and void?
-
-Public declared variables or methods are accessible anywhere in the application. Static declared variables or methods are globally accessible without creating an instance of the class. Static member are by default not globally accessible it depends upon the type of access modified used. The compiler stores the address of the method as the entry point and uses this information to begin execution before any objects are created. And Void is a type modifier that states that the method or variable does not return any value.
-
-5. What is an object?
+```
 
 
+### Can multiple catch blocks be executed?
+No, Multiple catch blocks can't be executed.   
+Once the proper catch code executed, the control is transferred to the finally block and then the code that follows the finally block gets executed.  
 
-An object is an instance of a class through which we access the methods of that class. "New" keyword is used to create an object. A class that creates an object in memory will contain the information about the methods, variables and behavior of that class.
+### What is the difference between public, static and void?
+* Public declared variables or methods are accessible anywhere in the application. Static declared variables or methods are globally accessible without creating an instance of the class.   
+* Static member are by default not globally accessible it depends upon the type of access modified used. The compiler stores the address of the method as the entry point and uses this information to begin execution before any objects are created.   
+* Void is a type modifier that states that the method or variable does not return any value.
 
-6. Define Constructors?
+### What is an object?
+* An object is an instance of a class through which we access the methods of that class.  
+* "New" keyword is used to create an object.   
+* A class that creates an object in memory will contain the information about the methods, variables and behavior of that class.
 
-A constructor is a member function in a class that has the same name as its class. The constructor is automatically invoked whenever an object class is created. It constructs the values of data members while initializing the class.
+### Define Constructors?
+* A constructor is a member function in a class that has the same name as its class.   
+* The constructor is automatically invoked whenever an object class is created.   
+* It constructs the values of data members while initializing the class.
 
-7. What is Jagged Arrays?
+### What is Jagged Arrays?
+* The array which has elements of type array is called jagged array.  
+* The elements can be of different dimensions and sizes.   
+* We can also call jagged array as Array of arrays.  
 
-The array which has elements of type array is called jagged array. The elements can be of different dimensions and sizes. We can also call jagged array as Array of arrays.
+### What is the difference between ref & out parameters?
+* An argument passed as ref must be initialized before passing to the method   
+* An out parameter needs not to be initialized before passing to a method.  
 
-8. What is the difference between ref & out parameters?
-
-An argument passed as ref must be initialized before passing to the method whereas out parameter needs not to be initialized before passing to a method.
-
-9. What is the use of using statement in C#?
-
+### What is the use of using statement in C#?
 The using block is used to obtain a resource and use it and then automatically dispose of when the execution of block completed.
 
-10. What is serialization?
-
+### What is serialization?
 When we want to transport an object through network then we have to convert the object into a stream of bytes. The process of converting an object into a stream of bytes is called Serialization. For an object to be serializable, it should implement ISerialize Interface. De-serialization is the reverse process of creating an object from a stream of bytes.
 
 11. Can "this" be used within a static method?
