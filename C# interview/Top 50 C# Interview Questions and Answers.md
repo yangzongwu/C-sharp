@@ -1,7 +1,7 @@
-### What is C#?
+# What is C#?
 C# is an object oriented, type safe and managed language that is compiled by .Net framework to generate Microsoft Intermediate Language.
 
-### What are the types of comment in C# with examples?
+# What are the types of comment in C# with examples?
 * Single line    
 ```csharp
 //This is a Single line comment
@@ -19,39 +19,38 @@ Last line of comment*/
 /// summary
 ```
 
-
-### Can multiple catch blocks be executed?
+# Can multiple catch blocks be executed?
 No, Multiple catch blocks can't be executed.   
 Once the proper catch code executed, the control is transferred to the finally block and then the code that follows the finally block gets executed.  
 
-### What is the difference between public, static and void?
+# What is the difference between public, static and void?
 * Public declared variables or methods are accessible anywhere in the application. Static declared variables or methods are globally accessible without creating an instance of the class.   
 * Static member are by default not globally accessible it depends upon the type of access modified used. The compiler stores the address of the method as the entry point and uses this information to begin execution before any objects are created.   
 * Void is a type modifier that states that the method or variable does not return any value.
 
-### What is an object?
+# What is an object?
 * An object is an instance of a class through which we access the methods of that class.  
 * "New" keyword is used to create an object.   
 * A class that creates an object in memory will contain the information about the methods, variables and behavior of that class.
 
-### Define Constructors?
+# Define Constructors?
 * A constructor is a member function in a class that has the same name as its class.   
 * The constructor is automatically invoked whenever an object class is created.   
 * It constructs the values of data members while initializing the class.
 
-### What is Jagged Arrays?
+# What is Jagged Arrays?
 * The array which has elements of type array is called jagged array.  
 * The elements can be of different dimensions and sizes.   
 * We can also call jagged array as Array of arrays.  
 
-### What is the difference between ref & out parameters?
+# What is the difference between ref & out parameters?
 * An argument passed as ref must be initialized before passing to the method   
 * An out parameter needs not to be initialized before passing to a method.  
 
-### What is the use of using statement in C#?
+# What is the use of using statement in C#?
 The using block is used to obtain a resource and use it and then automatically dispose of when the execution of block completed.
 
-### What is serialization?
+# What is serialization?
 When we want to transport an object through network then we have to convert the object into a stream of bytes. The process of converting an object into a stream of bytes is called Serialization. For an object to be serializable, it should implement ISerialize Interface. De-serialization is the reverse process of creating an object from a stream of bytes.
 
 11. Can "this" be used within a static method?
