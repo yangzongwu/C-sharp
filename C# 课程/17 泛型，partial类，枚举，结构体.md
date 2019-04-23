@@ -263,6 +263,183 @@ namespace HelloOOP
 * partial 类与 Windows Forms,WPF,ASP.NET.Core
 
 
-# 枚举  
+### 链接数据库  
+```csharp
+namespace HelloOOP
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbContext = new BookstoreEntities();
+            var books = dbContext.Books;
+            foreach(var book in books)
+            {
+                Console.WriteLine(book);
+            }
+        }
+    }
+}
+```
+### partial类  
+每次增加一列，book.cs会系统重置，但是Book2.cs由于不再该文件下，故不受影响，可以继续使用  
+不同的partial类可以用不同的语言  
+Book.cs
+```csharp
+namespace HelloOOP
+{
+    using System;
+    using System.Collections.Generic;
+    
+    public partial class Book
+    {
+        public int ID { get; set; }
+        public Nullable<int> CategoryID { get; set; }
+        public string Name { get; set; }
+        public double Price { get; set; }
+    }
+}
+```
+Book2.cs
+```csharp
+namespace HelloOOP
+{
+    public partial class Book
+    {
+        public string Report()
+        {
+            return $"#{this.ID} Name:{this.Name} Price:{this.Price}";
+        }
+    }
+}
+```
+program.cs
+```csharp
+namespace HelloOOP
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var dbContext = new BookstoreEntities();
+            var books = dbContext.Books;
+            foreach(var book in books)
+            {
+                Console.WriteLine(book.Report());
+            }
+        }
+    }
+}
+```
 
-# 结构体  
+# 枚举  
+* 认为限定取值范围的整数  
+* 整数值的对应  
+* 比特位式用法  
+```csharp
+namespace HelloOOP
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Person person = new Person();
+            //person.Level = "boss";//不用enum，程序可能造成bug，
+
+            Person person = new Person();
+            person.Level = Level.Employee;//系统自动生成
+            Person boss = new Person();
+            boss.Level = Level.Boss;
+
+            Console.WriteLine(boss.Level > person.Level);//可以比较的
+            Console.WriteLine((int)Level.Employee);//0
+            Console.WriteLine((int)Level.Manager);//1
+            Console.WriteLine((int)Level.Boss);//400
+            Console.WriteLine((int)Level.BigBoss);//401
+
+            //枚举类比特用法
+            Person person1 = new Person();
+            person1.skill = Skill.Cook;//要选择多个呢？
+            person1.skill = Skill.Drive | Skill.Cook | Skill.Program | Skill.Teach;
+            Console.WriteLine((person1.skill & Skill.Cook) == Skill.Cook);
+        }
+    }
+
+    enum Level{
+        Employee,
+        Manager,
+        Boss=400,//可以赋值
+        BigBoss,
+    }
+
+    enum Skill
+    {
+        Drive=1,
+        Cook=2,
+        Program=4,
+        Teach=8,
+    }
+    class Person
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Level Level { get; set; }
+        public Skill skill { get; set; }
+
+    }
+}
+```
+
+# 结构体（struct）    
+* 值类型，可装/拆箱  
+* 可实现接口，不能派生自类/结构体  
+* 不能有显示无参构造器  
+```csharp
+namespace HelloOOP
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student stu = new Student() { ID = 101, Name = "adf" };
+            object obj = stu;//装箱
+            Student stu0 = (Student)obj;//拆箱
+            Console.WriteLine(stu0.Name);
+
+            //是值类型，不是引用对象
+            Student stu3= new Student() { ID = 101, Name = "adf" };
+            Student stu2 = stu3;
+            stu2.Name = "aaa";
+            stu2.ID = 1;
+            stu2.Speak();
+            Console.WriteLine("{0},{1}", stu3.ID, stu2.ID);//101,1
+
+            //调用构造器
+            Student stu5 = new Student( 101,"adf");
+            stu5.Speak();
+        }
+    }
+
+    struct Student:ISpeak{ //可以实现接口,但是不能由class派生出来
+        public int ID { get; set; }
+        public string Name { get; set; }
+
+        public void Speak()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Student() { }//结构体不能有显示的无参构造器
+
+        public Student(int id,string name) {//结构体可以有显示的有参构造器
+            this.ID = id;
+            this.Name = name;
+        }
+    }
+
+    interface ISpeak
+    {
+        void Speak();
+    }
+}
+```
