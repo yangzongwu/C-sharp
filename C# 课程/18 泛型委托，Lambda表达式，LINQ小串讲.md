@@ -135,7 +135,7 @@ namespace ConsoleApp2
 * 匿名方法    
 * Inline 方法  
 ### 基本表达
-```charp
+```csharp
 namespace ConsoleApp2
 {
     class Program
