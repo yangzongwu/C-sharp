@@ -506,3 +506,156 @@ namespace ConsoleApp2.Tests
     }
 }
 ```
+
+
+# 接口  
+###  违反隔离原则一，笼统的在一起  
+```csharp
+namespace ConsoleApp2
+{
+    class Program{
+        static void Main(string[] args){
+            var driver = new Driver(new Car());
+            driver.Drive();//Car is running...
+            //如果需要即开车又要开坦克？
+        }
+    }
+    class Driver
+    {
+        private IVehicle _vehicle;
+        public Driver(IVehicle vehicle)
+        {
+            _vehicle = vehicle;
+        }
+        public void Drive()
+        {
+            _vehicle.Run();
+        }
+    }
+    interface IVehicle
+    {
+        void Run();
+    }
+    class Car : IVehicle
+    {
+        public void Run()
+        {
+            Console.WriteLine("Car is running...");
+        }
+    }
+    class Truck : IVehicle
+    {
+        public void Run()
+        {
+            Console.WriteLine("Truck is running...");
+        }
+    }
+    interface ITank
+    {
+        void Fire();
+        void Run();
+    }
+    class LightTank : ITank
+    {
+        public void Fire()
+        {
+            Console.WriteLine("Boom");
+        }
+
+        public void Run()
+        {
+            Console.WriteLine("LightTank running");
+        }
+    }
+    class MediumTank : ITank
+    {
+        public void Fire()
+        {
+            Console.WriteLine("Boom!!!");
+        }
+
+        public void Run()
+        {
+            Console.WriteLine("MediumTank running");
+        }
+    }
+}
+```
+升级  
+```csharp
+namespace ConsoleApp2
+{
+    class Program{
+        static void Main(string[] args){
+            var driver = new Driver(new Car());
+            driver.Drive();//Car is running...
+            var driver1 = new Driver(new LightTank());
+            driver1.Drive();//LightTank running
+        }
+    }
+    class Driver
+    {
+        private IVehicle _vehicle;
+        public Driver(IVehicle vehicle)
+        {
+            _vehicle = vehicle;
+        }
+        public void Drive()
+        {
+            _vehicle.Run();
+        }
+    }
+    interface IVehicle
+    {
+        void Run();
+    }
+    class Car : IVehicle
+    {
+        public void Run()
+        {
+            Console.WriteLine("Car is running...");
+        }
+    }
+    class Truck : IVehicle
+    {
+        public void Run()
+        {
+            Console.WriteLine("Truck is running...");
+        }
+    }
+
+    interface IWeapon
+    {
+        void Fire();
+    }
+    interface ITank:IWeapon,IVehicle
+    {
+    }
+    class LightTank : ITank
+    {
+        public void Fire()
+        {
+            Console.WriteLine("Boom");
+        }
+
+        public void Run()
+        {
+            Console.WriteLine("LightTank running");
+        }
+    }
+    class MediumTank : ITank
+    {
+        public void Fire()
+        {
+            Console.WriteLine("Boom!!!");
+        }
+
+        public void Run()
+        {
+            Console.WriteLine("MediumTank running");
+        }
+    }
+}
+```
+
+###  违反隔离原则二，过犹不及  
