@@ -178,3 +178,34 @@ namespace ConsoleApp2
     }
 }
 ```
+
+# LINQ: NET language Intergrated Query
+```csharp
+namespace ConsoleApp2
+{
+    public delegate double Calc(double x, double y);
+    class Program
+    {
+        static void Main(string[] args)
+        {//LINQ: NET language Intergrated Query
+            AdventureWorksEntities dbContext = new AdventureWorksEntities();
+            var allPeople = dbContext.People.ToList();
+            foreach(var p in allPeople)
+            {
+                Console.WriteLine(p.FirstName);
+            }
+            var allFirstNames = dbContext.People.Select(p => p.FirstName).ToList();
+            foreach (var fn in allFirstNames)
+            {
+                Console.WriteLine(fn);
+            }
+            var allFullNames = dbContext.People.Select(
+                p => p.FirstName+" "+p.LastName).ToList();
+            var allSomeNames = dbContext.People.Where(p=>p.FirstName=="Timothy").Select(
+                p => p.FirstName + " " + p.LastName).ToList();
+            var yesOrNo = dbContext.People.All(p => p.FirstName == "Timothy");
+            var yesOrNo1 = dbContext.People.Any(p => p.FirstName == "Timothy");
+        }
+    }    
+}
+```
