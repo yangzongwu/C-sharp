@@ -294,7 +294,7 @@ namespace ConsoleApp1
 }
 ```
 
-```charp
+```csharp
 namespace ConsoleApp1
 {
     class Program
