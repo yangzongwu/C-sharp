@@ -135,3 +135,187 @@ x >>= y：右移赋值。 将 x 值向右移动 y 位，结果存储在 x 中，
   * C#   .   get成员变量，是操作符  
   * Java  .  并不是操作符，Separators  
 
+###### ++x x++  
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int x = 100;
+            int y = 100;
+            int r1 = x++;//后置优先级高于前置优先级
+            int r2 = ++y;
+            Console.WriteLine("{0},{1}",r1,r2);
+        }
+    }
+    
+}
+```
+
+
+###### new 操作符  
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student stu = new Student();//变量声明语句
+
+            Student stu1 = null;//变量声明语句
+            stu1 = new Student();//变量赋值语句
+        }
+    }
+    class Student{   }
+}
+```
+
+
+###### 引用类型协变
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student[] students = new Student[10];
+            object[] objects = null;
+            object o = new Student();//隐式转换
+            Student haha = (Student) o; //显式转换
+
+            objects = students;
+            Student[] manystudent=(Student[]) objects; //引用类型数组协变，值类型不能
+            //引用类型所占大小都是一样的，而值类型所占大小不一样，所以值类型没有斜变这种说法
+
+            long l = 0;
+            int i = 100;
+            l = i;
+
+        }
+    }
+    class Student{   }
+}
+```
+
+###### 溢出   
+*，+ 溢出   
+ * 注意数据类型溢出  
+* /，%   
+ * 注意0  
+ * 注意什么时候是整除，什么时候算术除法     
+ * C系列语言遇到/都是整除，小数点去掉  -5/3=-1， python -5//3=-2    
+ 
+###### 左移右移  
+```charp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int x = 1;
+            x = x >> 32; //左移之前先对该书对32取余  
+            Console.WriteLine(x);//1
+            x = x >> 33;
+            Console.WriteLine(x);//2  33先对32取余为1，相当于左移1位
+            int x = 1;
+            x = x >> 64;
+            Console.WriteLine(x);//1
+        }
+    }
+}
+```
+
+###### 字符串比大小
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string n1 = "Tim";
+            string n2 = "tim";
+            Console.WriteLine(n1.CompareTo(n2));//1
+        }
+    }
+}
+```
+
+###### is as  
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //Human h = new Human();
+            //Student s = new Student();
+            //Console.WriteLine(s is Human);//True
+            //Console.WriteLine(s is object);//True
+
+            Human h = new Student();
+            Student s = h as Student;//尝试转换，如果不成功则是空  （c# 8.0 以上 pattern match）
+        }
+    }
+    class Human
+    {
+
+    }
+    class  Student : Human
+    {
+
+    }
+}
+```
+
+###### ??  和  ?.   
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string name = "ABC";
+            string source = name;
+            Console.WriteLine($"hello,{source} !");//hello,ABC !
+            string name1 = null;
+            string source1 = name1??"stranger";//如果null代替，相当于  source1= name1==null?"stranger":name1;
+            Console.WriteLine($"hello,{source1} !");//hello,stranger !
+
+        }
+    }
+}
+```
+
+```charp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Student student = new Student() { id = 1, name = "Tim" };
+            Console.WriteLine(student.id);
+            Student student1 = null;
+            Console.WriteLine(student1.id);
+            Student stu = new Student() { id = 1, name = "Tim" };
+        }
+    }
+    class Human
+    {
+
+    }
+    class  Student : Human
+    {
+        public int id;
+        public string name;
+    }
+}
+```
