@@ -302,10 +302,11 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Student student = new Student() { id = 1, name = "Tim" };
-            Console.WriteLine(student.id);
+            Console.WriteLine(student.id);//1
             Student student1 = null;
-            Console.WriteLine(student1.id);
+            Console.WriteLine(student1.id);//error
             Student stu = new Student() { id = 1, name = "Tim" };
+            Console.WriteLine((stu ?? student).id);//1
         }
     }
     class Human
