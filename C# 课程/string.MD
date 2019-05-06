@@ -95,6 +95,7 @@ namespace ConsoleApp1
 ```
 
 # 文件读写
+### write   
 ```csharp
 namespace ConsoleApp1
 {
@@ -155,6 +156,36 @@ namespace ConsoleApp1
 
         }
        
+    }
+}
+```
+
+### read  
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string filePath = Path.Combine("C:", "Temp", "Happy", "IO.txt");
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("error");
+                return;
+            }
+            var outputStream = File.OpenRead(filePath);
+            var streamReader = new StreamReader(outputStream);
+            string line = null;
+            while (!String.IsNullOrEmpty(line = streamReader.ReadLine()))
+            {
+                Console.WriteLine($"I GOT {line}");
+            }
+            streamReader.Close();
+            outputStream.Close();
+        }
+
+
     }
 }
 ```
