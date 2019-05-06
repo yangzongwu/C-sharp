@@ -189,3 +189,43 @@ namespace ConsoleApp1
     }
 }
 ```
+
+把前两列相加放到第三列
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string filePath = Path.Combine("C:", "Temp", "Happy", "Book1.cvs");
+            string filePathTemp = Path.Combine("C:", "Temp", "Happy", "Book1Temp.cvs");
+
+            var readStream = File.OpenRead(filePath);
+            var reader = new StreamReader(readStream);
+
+            var writeStream = File.Create(filePathTemp);
+            var writer = new StreamWriter(writeStream);
+
+            string line = null;
+
+            while (!String.IsNullOrEmpty(line = reader.ReadLine()))
+            {
+                var parts =line.Split(',');
+                int sum = int.Parse(parts[0]) + int.Parse(parts[1]);
+                var result = $"{line},{sum}";
+                writer.WriteLine(result);
+            }
+            writer.Flush();
+            writer.Close();
+            writeStream.Close();
+            reader.Close();
+            readStream.Close();
+            File.Delete(filePath);
+            File.Move(filePathTemp, filePath);//改名
+        }
+
+
+    }
+}
+```
