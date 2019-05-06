@@ -93,3 +93,68 @@ namespace ConsoleApp1
     }
 }
 ```
+
+# 文件读写
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //path, Directory,File
+            string rootPath = Path.Join("C:", "Temp");
+            Console.WriteLine(rootPath);
+            string dirPath = Path.Join(rootPath, "Happy");
+            Directory.CreateDirectory(dirPath);//创建Happy文件夹
+            string[] names = { "Time", "Mike", "Seay" };
+            string filePath = Path.Join(dirPath, "names.txt");
+            File.WriteAllLines(filePath, names);//写文件
+
+            string[] allNames = File.ReadAllLines(filePath);
+            foreach(var name in allNames)
+            {
+                Console.WriteLine(name);
+            }
+            //全读全写，依赖于内存缓存，不建议这么处理，只能处理小的文件
+            //streaming 流式读写
+        }
+       
+    }
+}
+```
+
+```sharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string filePath = Path.Combine("C:", "Temp", "Happy", "IO.txt");
+            Console.WriteLine(filePath);//C:\Temp\Happy\IO.txt
+
+            FileStream inputStream = null;
+            if (File.Exists(filePath))
+            {
+                inputStream = File.OpenWrite(filePath);
+            }
+            else
+            {
+                inputStream = File.Create(filePath);
+            }
+
+            var streamWriter = new StreamWriter(inputStream);
+            for(int i = 0; i < 9; i++)
+            {
+                streamWriter.WriteLine(i.ToString());
+            }
+            streamWriter.Flush();
+            streamWriter.Close();
+            inputStream.Close();
+
+        }
+       
+    }
+}
+```
