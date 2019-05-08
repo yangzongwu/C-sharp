@@ -659,3 +659,161 @@ namespace ConsoleApp2
 ```
 
 ###  违反隔离原则二，过犹不及  
+
+
+
+# 课堂补充  
+一层：IEnumerable<T>, IEnumerable  
+二层：CRUD ICollection<T>  
+三层：ILIST<T>  
+    
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IList<int> list = new List<int>();
+            PlayWithList(list);
+        }
+        static  void PlayWithList(IList<int> list)
+        {
+            Console.WriteLine($"oh, you have {list.Count} elements!");
+            list.Add(100);
+            list.Add(200);
+            list.Add(300);
+            Console.WriteLine($"oh, you have {list.Count} elements!");
+        }
+    }
+}
+```
+
+```csharp
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CrazyList list = new CrazyList();
+            Console.WriteLine($"oh, you have {list.Count} elements!");
+            list.Add(100);
+            list.Add(200);
+            list.Add(300);
+            Console.WriteLine($"oh, you have {list.Count} elements!");
+        }
+    }
+    class CrazyList : IList<int>//实现了所有的方法，具有这些功能，但是保证不了功能的正确性,接口如何约束行为
+    {
+        public int this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int Count {
+            get { return 10000; }
+        }
+
+        public bool IsReadOnly => throw new NotImplementedException();
+
+        int ICollection<int>.Count => throw new NotImplementedException();
+
+        bool ICollection<int>.IsReadOnly => throw new NotImplementedException();
+
+        int IList<int>.this[int index] { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void Add(int item)
+        {
+            Console.WriteLine("No!");
+        }
+
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Contains(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CopyTo(int[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerator<int> GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int IndexOf(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Insert(int index, int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Remove(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        int IList<int>.IndexOf(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IList<int>.Insert(int index, int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IList<int>.RemoveAt(int index)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICollection<int>.Add(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICollection<int>.Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<int>.Contains(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICollection<int>.CopyTo(int[] array, int arrayIndex)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool ICollection<int>.Remove(int item)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator<int> IEnumerable<int>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
+```
