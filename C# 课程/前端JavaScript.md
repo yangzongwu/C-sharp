@@ -1,5 +1,5 @@
 # 课堂补充 
-前端 JavaScript  
+前端 JavaScript  (typeScript 微软新出来的，增加类型的限制，JavaScript对于类型无限制)  
 中间 java,C#(ASP),python(Django) ....  
 后端SQL  
 Script解释型语言  逐行执行  结果面向机器，速度快，代码更新，客户没有更新的话没有最新版本，必须解析之后分发给客户（JavaScript python）    
@@ -125,4 +125,104 @@ C#，Java 编译型语言  整块执行  执行效率比较低，客户直接拿
     }
 </script>
 </html>
+```
+
+###  前端学习  
+重点在框架不是算法  
+
+
+# JavaScript
+https://developer.mozilla.org/en-US/docs/Web/JavaScript  
+### 数据类型  
+常见数据类型number, string, boolean  
+* Type Variable Value    
+  * Type不能约束Variable  
+  * Variable没有Type  
+  * 所有值都是有Type  
+  * Type决定了Value的取值范围和行为  
+  * JavaScript没有值关系  
+  * 所有都是引用关系，没有值关系  
+  * 值决定了变量类型  
+  * 没有兼容一说  
+  * 表达式和值  
+  * 表达式的类型也就是其值的类型，和C# 一样   
+### 表达式    
+  * && || 一样有短路效应   
+  * delete  
+  * in  
+  * instanceof    
+```javascript
+class Student {
+    constructor(id, name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+let stu = new Student(1, "Tim");
+console.log(stu instanceof Student);
+```
+### 语句statments  
+C# function 隶属于class  
+javascript function 和class 同一级别  
+javascript 没有委托，变量天生是委托  
+```javascript
+Function sayHello(){
+    console.log("hello");
+}
+let xxx = sayHello;
+xxx();
+```
+```javascript 
+let sayHello=function(){//匿名函数
+    console.log("hello");
+}
+```
+```javascript
+let sayHello=()=>{
+    console.log("hello");
+}
+sayHello();
+```
+for 和C# 不一样  
+```javascript
+let names = ["ts", "s", "sd"];
+for (let i in names) {
+    console.log(i);//0,1,2
+    console.log(names[i]);//"ts", "s", "sd"
+}
+```
+
+cctv.js  export  import // 案例还有问题  
+```javascript
+export class TV {
+    constructor(channel) {
+        this.channel = channel;
+    }
+    play() {
+        if (this.channel == 1) {
+            console.log("dsdf");
+        }
+        else if (this.channel == 2) {
+            console.log("dsdf");
+        }
+        else{
+            console.log("dsdf");
+        }
+    }
+}
+```
+hello.js  
+```javascript
+import { TV } from './cctv';
+let tv0 = new TV(1);
+tv0.play();
+```
+
+### function   
+```javascript
+function add(a, b) {
+    return a + b;
+}
+console.log(add(100, 200));
+console.log(add("sd", "apple"));
 ```
