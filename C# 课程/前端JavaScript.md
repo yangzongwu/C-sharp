@@ -1,7 +1,7 @@
 # 课堂补充 
-前端 JavaScript  (typeScript 微软新出来的，增加类型的限制，JavaScript对于类型无限制)  
-中间 java,C#(ASP),python(Django) ....  
-后端SQL  
+* 前端 JavaScript  (typeScript 微软新出来的，增加类型的限制，JavaScript对于类型无限制)  
+* 中间 java,C#(ASP),python(Django) ....  
+* 后端SQL  
 Script解释型语言  逐行执行  结果面向机器，速度快，代码更新，客户没有更新的话没有最新版本，必须解析之后分发给客户（JavaScript python）    
 C#，Java 编译型语言  整块执行  执行效率比较低，客户直接拿到最新的版本（C系例，Java）    
 * 对于有错的语言    
